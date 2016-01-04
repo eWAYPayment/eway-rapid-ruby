@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.name          = 'eway_rapid'
   spec.version       = EwayRapid::VERSION
   spec.required_ruby_version = '>= 1.9.3'
-  spec.author       = ['eWAY']
+  spec.author        = ['eWAY']
   spec.summary       = 'Ruby gem for eWAY\'s Rapid API'
   spec.description   = 'Easy online payments with eWAY and the eWAY Rapid Ruby gem.'
   spec.homepage      = 'https://www.eway.com.au'
