@@ -51,7 +51,7 @@ api_key = 'Rapid API Key'
 password = 'Rapid API Password'
 endpoint = 'sandbox'
 
-client = RapidSDK::RapidClient.new(api_key, password, endpoint)
+client = EwayRapid::RapidClient.new(api_key, password, endpoint)
 
 transaction = EwayRapid::Models::Transaction.new
 transaction.customer = EwayRapid::Models::Customer.new

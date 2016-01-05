@@ -44,39 +44,39 @@ module EwayRapid
       begin
         case payment_method
         when Enums::PaymentMethod::DIRECT
-          url = @rapid_endpoint + Constants::DIRECT_PAYMENT_METHOD_NAME + Constants::JSON_SUFFIX
+          url = @web_url + Constants::DIRECT_PAYMENT_METHOD_NAME + Constants::JSON_SUFFIX
 
           request = Message::TransactionProcess::TransDirectPaymentMsgProcess.create_request(transaction)
           response = Message::TransactionProcess::TransDirectPaymentMsgProcess.send_request(url, @api_key, @password, request)
           Message::TransactionProcess::TransDirectPaymentMsgProcess.make_result(response)
         when Enums::PaymentMethod::RESPONSIVE_SHARED
-          url = @rapid_endpoint + Constants::RESPONSIVE_SHARED_METHOD_NAME + Constants::JSON_SUFFIX
+          url = @web_url + Constants::RESPONSIVE_SHARED_METHOD_NAME + Constants::JSON_SUFFIX
 
           request = Message::TransactionProcess::TransResponsiveSharedMsgProcess.create_request(transaction)
           response = Message::TransactionProcess::TransResponsiveSharedMsgProcess.send_request(url, @api_key, @password, request)
           Message::TransactionProcess::TransResponsiveSharedMsgProcess.make_result(response)
         when Enums::PaymentMethod::TRANSPARENT_REDIRECT
-          url = @rapid_endpoint + Constants::TRANSPARENT_REDIRECT_METHOD_NAME + Constants::JSON_SUFFIX
+          url = @web_url + Constants::TRANSPARENT_REDIRECT_METHOD_NAME + Constants::JSON_SUFFIX
 
           request = Message::TransactionProcess::TransTransparentRedirectMsgProcess.create_request(transaction)
           response = Message::TransactionProcess::TransTransparentRedirectMsgProcess.send_request(url, @api_key, @password, request)
           Message::TransactionProcess::TransTransparentRedirectMsgProcess.make_result(response)
         when Enums::PaymentMethod::WALLET
           if transaction.capture
-            url = @rapid_endpoint + Constants::DIRECT_PAYMENT_METHOD_NAME + Constants::JSON_SUFFIX
+            url = @web_url + Constants::DIRECT_PAYMENT_METHOD_NAME + Constants::JSON_SUFFIX
 
             request = Message::TransactionProcess::TransDirectPaymentMsgProcess.create_request(transaction)
             response = Message::TransactionProcess::TransDirectPaymentMsgProcess.send_request(url, @api_key, @password, request)
             Message::TransactionProcess::TransDirectPaymentMsgProcess.make_result(response)
           else
-            url = @rapid_endpoint + Constants::CAPTURE_PAYMENT_METHOD
+            url = @web_url + Constants::CAPTURE_PAYMENT_METHOD
 
             request = Message::TransactionProcess::CapturePaymentMsgProcess.create_request(transaction)
             response = Message::TransactionProcess::CapturePaymentMsgProcess.send_request(url, @api_key, @password, request)
             Message::TransactionProcess::CapturePaymentMsgProcess.make_result(response)
           end
         when Enums::PaymentMethod::AUTHORISATION
-          url = @rapid_endpoint + Constants::CAPTURE_PAYMENT_METHOD
+          url = @web_url + Constants::CAPTURE_PAYMENT_METHOD
 
           request = Message::TransactionProcess::CapturePaymentMsgProcess.create_request(transaction)
           response = Message::TransactionProcess::CapturePaymentMsgProcess.send_request(url, @api_key, @password, request)
@@ -140,7 +140,7 @@ module EwayRapid
       end
 
       begin
-        url = @rapid_endpoint + Constants::TRANSACTION_METHOD
+        url = @web_url + Constants::TRANSACTION_METHOD
 
         request = Message::RefundProcess::RefundMsgProcess.create_request(refund)
         response = Message::RefundProcess::RefundMsgProcess.send_request(url, @api_key, @password, request)
@@ -160,7 +160,7 @@ module EwayRapid
         return make_response_with_exception(Exceptions::APIKeyInvalidException.new('API key, password or Rapid endpoint missing or invalid'), RefundResponse)
       end
       begin
-        url = @rapid_endpoint + Constants::CANCEL_AUTHORISATION_METHOD
+        url = @web_url + Constants::CANCEL_AUTHORISATION_METHOD
 
         request = Message::RefundProcess::CancelAuthorisationMsgProcess.create_request(refund)
         response = Message::RefundProcess::CancelAuthorisationMsgProcess.send_request(url, @api_key, @password, request)
@@ -184,19 +184,19 @@ module EwayRapid
       begin
         case payment_method
         when Enums::PaymentMethod::DIRECT
-          url = @rapid_endpoint + Constants::DIRECT_PAYMENT_METHOD_NAME + Constants::JSON_SUFFIX
+          url = @web_url + Constants::DIRECT_PAYMENT_METHOD_NAME + Constants::JSON_SUFFIX
 
           request = Message::CustomerProcess::CustDirectPaymentMsgProcess.create_request(customer)
           response = Message::CustomerProcess::CustDirectPaymentMsgProcess.send_request(url, @api_key, @password, request)
           Message::CustomerProcess::CustDirectPaymentMsgProcess.make_result(response)
         when Enums::PaymentMethod::RESPONSIVE_SHARED
-          url = @rapid_endpoint + Constants::RESPONSIVE_SHARED_METHOD_NAME + Constants::JSON_SUFFIX
+          url = @web_url + Constants::RESPONSIVE_SHARED_METHOD_NAME + Constants::JSON_SUFFIX
 
           request = Message::CustomerProcess::CustResponsiveSharedMsgProcess.create_request(customer)
           response = Message::CustomerProcess::CustResponsiveSharedMsgProcess.send_request(url, @api_key, @password, request)
           Message::CustomerProcess::CustResponsiveSharedMsgProcess.make_result(response)
         when Enums::PaymentMethod::TRANSPARENT_REDIRECT
-          url = @rapid_endpoint + Constants::TRANSPARENT_REDIRECT_METHOD_NAME + Constants::JSON_SUFFIX
+          url = @web_url + Constants::TRANSPARENT_REDIRECT_METHOD_NAME + Constants::JSON_SUFFIX
 
           request = Message::CustomerProcess::CustTransparentRedirectMsgProcess.create_request(customer)
           response = Message::CustomerProcess::CustTransparentRedirectMsgProcess.send_request(url, @api_key, @password, request)
@@ -222,18 +222,18 @@ module EwayRapid
       begin
         case payment_method
         when Enums::PaymentMethod::DIRECT
-          url = @rapid_endpoint + Constants::DIRECT_PAYMENT_METHOD_NAME + Constants::JSON_SUFFIX
+          url = @web_url + Constants::DIRECT_PAYMENT_METHOD_NAME + Constants::JSON_SUFFIX
           request = Message::CustomerProcess::CustDirectUpdateMsgProcess.create_request(customer)
           response = Message::CustomerProcess::CustDirectUpdateMsgProcess.send_request(url, @api_key, @password, request)
           Message::CustomerProcess::CustDirectUpdateMsgProcess.make_result(response)
         when Enums::PaymentMethod::RESPONSIVE_SHARED
-          url = @rapid_endpoint + Constants::RESPONSIVE_SHARED_METHOD_NAME + Constants::JSON_SUFFIX
+          url = @web_url + Constants::RESPONSIVE_SHARED_METHOD_NAME + Constants::JSON_SUFFIX
 
           request = Message::CustomerProcess::CustResponsiveUpdateMsgProcess.create_request(customer)
           response = Message::CustomerProcess::CustResponsiveUpdateMsgProcess.send_request(url, @api_key, @password, request)
           Message::CustomerProcess::CustResponsiveUpdateMsgProcess.make_result(response)
         when Enums::PaymentMethod::TRANSPARENT_REDIRECT
-          url = @rapid_endpoint + Constants::TRANSPARENT_REDIRECT_METHOD_NAME + Constants::JSON_SUFFIX
+          url = @web_url + Constants::TRANSPARENT_REDIRECT_METHOD_NAME + Constants::JSON_SUFFIX
 
           request = Message::CustomerProcess::CustTransparentUpdateMsgProcess.create_request(customer)
           response = Message::CustomerProcess::CustTransparentUpdateMsgProcess.send_request(url, @api_key, @password, request)
@@ -258,7 +258,7 @@ module EwayRapid
         return make_response_with_exception(Exceptions::APIKeyInvalidException.new('API key, password or Rapid endpoint missing or invalid'), QueryCustomerResponse)
       end
       begin
-        url = @rapid_endpoint + Constants::DIRECT_CUSTOMER_SEARCH_METHOD + Constants::JSON_SUFFIX
+        url = @web_url + Constants::DIRECT_CUSTOMER_SEARCH_METHOD + Constants::JSON_SUFFIX
         url = URI.encode(url)
 
         request = Message::CustomerProcess::QueryCustomerMsgProcess.create_request(token_customer_id.to_s)
@@ -306,9 +306,9 @@ module EwayRapid
       end
       begin
         if request.nil? || request == ''
-          url = @rapid_endpoint + request_path + '/' + '0'
+          url = @web_url + request_path + '/' + '0'
         else
-          url = @rapid_endpoint + request_path + '/' + request
+          url = @web_url + request_path + '/' + request
         end
         url = URI.encode(url)
 
@@ -358,7 +358,7 @@ module EwayRapid
             @list_error.clear
           end
           set_valid(true)
-          @logger.info "Initiate client [#{@rapid_endpoint}] successful!" if @logger
+          @logger.info "Initiate client using [#{@web_url}] successful!" if @logger
         rescue => e
           @logger.error "Error setting Rapid endpoint #{e.backtrace.inspect}" if @logger
           set_valid(false)

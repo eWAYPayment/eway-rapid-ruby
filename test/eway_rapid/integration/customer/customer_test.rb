@@ -33,7 +33,7 @@ class CustomerTest < TestBase
     invalid_endpoint = 'https://api.sandbox.ewaypayments.com/'
     client = EwayRapid::RapidClient.new(IntegrationTest::API_KEY, 'ABCXYZ', invalid_endpoint)
     fake_web_url = 'https://hhhhhhh.ggg/'
-    client.instance_variable_set('@rapid_endpoint', fake_web_url)
+    client.instance_variable_set('@web_url', fake_web_url)
 
     card_details = EwayRapid::InputModelFactory.create_card_detail('12', '25')
     @customer.card_details = card_details
