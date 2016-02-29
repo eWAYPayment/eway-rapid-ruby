@@ -14,7 +14,7 @@ module EwayRapid
           request.customer = convert.do_convert(input)
           request.customer_ip = input.customer_device_ip
           request.method = Constants::CREATE_TOKEN_CUSTOMER_METHOD
-          request.transaction_type = Enums::TransactionType::PURCHASE
+          request.transaction_type = Enums::TransactionType::MOTO
           request
         end
 
@@ -157,7 +157,7 @@ module EwayRapid
           request.customer = converter.do_convert(input)
           request.customer_ip = input.customer_device_ip
           request.method = Constants::UPDATE_TOKEN_CUSTOMER_METHOD
-          request.transaction_type = Enums::TransactionType::PURCHASE
+          request.transaction_type = Enums::TransactionType::MOTO
           request
         end
 

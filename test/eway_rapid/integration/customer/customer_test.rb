@@ -85,6 +85,22 @@ class CustomerTest < TestBase
     assert(errors.nil? || errors.length == 0)
   end
 
+  def test_query_direct_valid_customer_id_no_cvn
+    @customer.address = @address
+    card_details = EwayRapid::InputModelFactory.create_card_detail('12', '25')
+    card_details.cvn = nil
+    @customer.card_details = card_details
+    response = IntegrationTest.get_sandbox_client.create_customer(EwayRapid::Enums::PaymentMethod::DIRECT, @customer)
+
+    token_customer_id = response.customer.token_customer_id
+    assert_not_nil(token_customer_id)
+
+    token_id = Integer(token_customer_id)
+    cust_response = IntegrationTest.get_sandbox_client.query_customer(token_id)
+    errors = cust_response.errors
+    assert(errors.nil? || errors.length == 0)
+  end
+
   def test_create_customer_with_response_shared
     @customer.address = @address
     card_details = EwayRapid::InputModelFactory.create_card_detail('12', '25')
