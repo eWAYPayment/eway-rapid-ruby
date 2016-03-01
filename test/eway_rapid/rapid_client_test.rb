@@ -109,4 +109,10 @@ class RapidClientTest < TestBase
     error_code = 'S9991'
     assert_equal('Library does not have PublicAPI key initialised, or Key is Invalid', EwayRapid::RapidClient.user_display_message(error_code))
   end
+
+  def test_find_error_code_with_langugage
+    error_code = 'S9991'
+    assert_equal('Library does not have PublicAPI key initialised, or Key is Invalid', EwayRapid::RapidClient.user_display_message(error_code, 'en'))
+    assert_equal('Library does not have PublicAPI key initialised, or Key is Invalid', EwayRapid::RapidClient.user_display_message(error_code, 'EN'))
+  end
 end

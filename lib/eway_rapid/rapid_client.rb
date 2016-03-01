@@ -298,7 +298,7 @@ module EwayRapid
     # @param [String] language The 2 letter code for the language to translate to (only en at this time)
     # @return [String] Error message
     def self.user_display_message(code, language = 'en')
-      find_error_code(code, language)
+      find_error_code(code, language.downcase)
     end
 
     # Gets the valid status of this Rapid client
