@@ -270,6 +270,28 @@ module EwayRapid
       end
     end
 
+    # Performs a search of settlements
+    #
+    # @param [SettlementSearch]
+    # @return [SettlementSearchResponse]
+    def settlement_search(search_request)
+      unless @is_valid
+        return make_response_with_exception(Exceptions::APIKeyInvalidException.new('API key, password or Rapid endpoint missing or invalid'), QueryCustomerResponse)
+      end
+      begin
+
+        request = Message::TransactionProcess::SettlementSearchMsgProcess.create_request(search_request)
+        url = @web_url + Constants::SETTLEMENT_SEARCH_METHOD +  request
+
+        response = Message::TransactionProcess::SettlementSearchMsgProcess.send_request(url, @api_key, @password)
+        Message::TransactionProcess::SettlementSearchMsgProcess.make_result(response)
+
+      rescue => e
+        @logger.error(e.to_s) if @logger
+        make_response_with_exception(e, SettlementSearchResponse)
+      end
+    end
+
     # Translate an error code to a user friendly message
     #
     # @param [String] code The code to translate
@@ -354,7 +376,7 @@ module EwayRapid
       if @is_valid
         begin
           parser_endpoint_to_web_url
-          if !@list_error.nil?
+          unless @list_error.nil?
             @list_error.clear
           end
           set_valid(true)
@@ -365,7 +387,7 @@ module EwayRapid
           add_error_code(Constants::LIBRARY_NOT_HAVE_ENDPOINT_ERROR_CODE)
         end
       else
-        @logger.warn "Invald parameter passed to Rapid client" if @logger
+        @logger.warn 'Invalid parameter passed to Rapid client' if @logger
       end
     end
 

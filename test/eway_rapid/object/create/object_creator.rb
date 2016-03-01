@@ -148,5 +148,42 @@ module EwayRapid
       options.push('Option 1')
       options
     end
+
+    def self.create_settlement_transaction
+      settlement_transaction = InternalModels::SettlementTransaction.new
+      settlement_transaction.settlement_id = '53e78b14-ac2c-4b1b-a099-a12c6d5f30bc'
+      settlement_transaction.eway_customer_id = 87654321
+      settlement_transaction.currency = '36'
+      settlement_transaction.currency_code = 'AUD'
+      settlement_transaction.transaction_id = 11258912
+      settlement_transaction.txn_reference = '0000000011258912'
+      settlement_transaction.card_type = 'VI'
+      settlement_transaction.amount = 100
+      settlement_transaction.transaction_type = '1'
+      settlement_transaction.transaction_date = '/Date(1422795600000)/'
+      settlement_transaction.settlement_date = '/Date(1422795600000)/'
+      settlement_transaction
+    end
+
+    def self.create_settlement_summary
+      settlement_summary = InternalModels::SettlementSummary.new
+      settlement_summary.settlement_id = '53e78b14-ac2c-4b1b-a099-a12c6d5f30bc'
+      settlement_summary.currency = '36'
+      settlement_summary.currency_code = 'AUD'
+      settlement_summary.total_credit = 97100
+      settlement_summary.total_debit = 320
+      settlement_summary.total_balance = 96780
+      settlement_summary
+    end
+
+    def self.create_balance
+      balance = InternalModels::BalancePerCardType.new
+      balance.card_type = 'VI'
+      balance.number_of_transactions = 14
+      balance.credit = 97100
+      balance.debit = 320
+      balance.balance = 94780
+      balance
+    end
   end
 end

@@ -330,5 +330,48 @@ module EwayRapid
       # The result of the Beagle Verify phone verification
       attr_accessor :beagle_phone
     end
+
+    class SettlementSearch
+      attr_accessor :report_mode
+      attr_accessor :settlement_date
+      attr_accessor :start_date
+      attr_accessor :end_date
+      attr_accessor :card_type
+      attr_accessor :currency
+      attr_accessor :page
+      attr_accessor :page_size
+    end
+
+    class SettlementSummary
+      attr_accessor :settlement_id
+      attr_accessor :currency
+      attr_accessor :currency_code
+      attr_accessor :total_credit
+      attr_accessor :total_debit
+      attr_accessor :total_balance
+      attr_accessor :balance_per_card_type
+    end
+
+    class BalancePerCardType
+      attr_accessor :card_type
+      attr_accessor :number_of_transactions
+      attr_accessor :credit
+      attr_accessor :debit
+      attr_accessor :balance
+    end
+
+    class SettlementTransaction
+      attr_accessor :settlement_id
+      attr_accessor :eway_customer_id
+      attr_accessor :currency
+      attr_accessor :currency_code
+      attr_accessor :transaction_id
+      attr_accessor :txn_reference
+      attr_accessor :card_type
+      attr_accessor :amount
+      attr_accessor :transaction_type
+      attr_accessor :transaction_date
+      attr_accessor :settlement_date
+    end
   end
 end

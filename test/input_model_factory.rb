@@ -104,6 +104,14 @@ module EwayRapid
       shipping_detail
     end
 
+    def self.create_settlement_search
+      settlement_search = Models::SettlementSearch.new
+      settlement_search.report_mode = 'Both'
+      settlement_search.settlement_date = '2016-02-02'
+      settlement_search.card_type = Enums::CardType::VISA
+      settlement_search
+    end
+
     def self.random_string(number)
       o = [('a'..'z'), ('A'..'Z')].map { |i| i.to_a }.flatten
       (0...number).map { o[rand(o.length)] }.join

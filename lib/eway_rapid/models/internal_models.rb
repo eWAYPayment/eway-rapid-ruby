@@ -427,5 +427,117 @@ module EwayRapid
         verification
       end
     end
+
+    class SettlementSummary
+      attr_accessor :settlement_id
+      attr_accessor :currency
+      attr_accessor :currency_code
+      attr_accessor :total_credit
+      attr_accessor :total_debit
+      attr_accessor :total_balance
+      attr_accessor :balance_per_card_type
+
+      def self.from_json(json)
+        hash = JSON.parse(json)
+        from_hash(hash)
+      end
+
+      def self.from_hash(hash)
+        settlement_summary = SettlementSummary.new
+        settlement_summary.settlement_id = hash[Constants::SETTLEMENT_ID]
+        settlement_summary.currency = hash[Constants::CURRENCY]
+        settlement_summary.currency_code = hash[Constants::CURRENCY_CODE]
+        settlement_summary.total_credit = hash[Constants::TOTAL_CREDIT]
+        settlement_summary.total_debit = hash[Constants::TOTAL_DEBIT]
+        settlement_summary.total_balance = hash[Constants::TOTAL_BALANCE]
+        settlement_summary.balance_per_card_type = BalancePerCardType.from_array(hash[Constants::BALANCE_PER_CARD_TYPE])
+        settlement_summary
+      end
+
+      def self.from_array(array)
+        summaries = []
+        array.each {|summary_hash|
+          obj = from_hash(summary_hash)
+          summaries.push(obj)
+        }
+        summaries
+      end
+    end
+
+    class BalancePerCardType
+      attr_accessor :card_type
+      attr_accessor :number_of_transactions
+      attr_accessor :credit
+      attr_accessor :debit
+      attr_accessor :balance
+
+      def self.from_json(json)
+        hash = JSON.parse(json)
+        from_hash(hash)
+      end
+
+      def self.from_hash(hash)
+        balance = BalancePerCardType.new
+        balance.card_type = hash[Constants::CARD_TYPE]
+        balance.number_of_transactions = hash[Constants::NUMBER_OF_TRANSACTIONS]
+        balance.credit = hash[Constants::CREDIT]
+        balance.debit = hash[Constants::DEBIT]
+        balance.balance = hash[Constants::BALANCE]
+        balance
+      end
+
+      def self.from_array(array)
+        balances = []
+        array.each {|balance_hash|
+          obj = from_hash(balance_hash)
+          balances.push(obj)
+        }
+        balances
+      end
+    end
+
+    class SettlementTransaction
+      attr_accessor :settlement_id
+      attr_accessor :eway_customer_id
+      attr_accessor :currency
+      attr_accessor :currency_code
+      attr_accessor :transaction_id
+      attr_accessor :txn_reference
+      attr_accessor :card_type
+      attr_accessor :amount
+      attr_accessor :transaction_type
+      attr_accessor :transaction_date
+      attr_accessor :settlement_date
+
+      def self.from_json(json)
+        hash = JSON.parse(json)
+        from_hash(hash)
+      end
+
+      def self.from_hash(hash)
+        transaction = SettlementTransaction.new
+        transaction.settlement_id = hash[Constants::SETTLEMENT_ID]
+        transaction.eway_customer_id = hash[Constants::EWAY_CUSTOMER_ID]
+        transaction.currency = hash[Constants::CURRENCY]
+        transaction.currency_code = hash[Constants::CURRENCY_CODE]
+        transaction.transaction_id = hash[Constants::TRANSACTION_ID]
+        transaction.txn_reference = hash[Constants::TXN_REFERENCE]
+        transaction.card_type = hash[Constants::CARD_TYPE]
+        transaction.amount = hash[Constants::AMOUNT]
+        transaction.transaction_type = hash[Constants::TRANSACTION_TYPE]
+        transaction.transaction_date = hash[Constants::TRANSACTION_DATE]
+        transaction.settlement_date = hash[Constants::SETTLEMENT_DATE]
+        transaction
+      end
+
+      def self.from_array(array)
+        transactions = []
+        array.each {|transaction_hash|
+          obj = from_hash(transaction_hash)
+          transactions.push(obj)
+        }
+        transactions
+      end
+    end
   end
 end

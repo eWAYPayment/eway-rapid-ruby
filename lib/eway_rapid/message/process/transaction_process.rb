@@ -134,6 +134,30 @@ module EwayRapid
           converter.do_convert(transaction_search_resp)
         end
       end
+
+      # Settlement search message process
+      class SettlementSearchMsgProcess
+        include RestProcess
+
+        def self.create_request(input)
+          hash = {}
+          input.instance_variables.map do |var|
+            hash[var.to_s.delete('@').split('_').collect(&:capitalize).join] = input.instance_variable_get(var)
+          end
+
+          URI.encode_www_form(hash)
+        end
+
+        def self.send_request(url, api_key, password)
+          SettlementSearchMsgProcess.new.do_get(url, api_key, password)
+        end
+
+        def self.make_result(response)
+          settlement_search_resp = DirectSettlementSearchResponse.from_json(response)
+          converter = Convert::Response::DirectSettlementToSettlement.new
+          converter.do_convert(settlement_search_resp)
+        end
+      end
     end
   end
 end

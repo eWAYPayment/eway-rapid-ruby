@@ -122,5 +122,19 @@ module EwayRapid
         end
       end
     end
+
+    class CardType
+      ALL = 'ALL'
+      VISA = 'VI'
+      MASTERCARD = 'MC'
+      AMEX = 'AX'
+      DINERS = 'DC'
+      JCB = 'JC'
+      MAESTRO_UK = 'MD'
+      MAESTRO_INTERNATIONAL = 'MI'
+      SOLO = 'SO'
+      LASER = 'LA'
+      DISCOVER = 'DS'
+    end
   end
 end

@@ -18,6 +18,7 @@ require File.join(File.dirname(__FILE__), 'eway_rapid', 'output', 'create_transa
 require File.join(File.dirname(__FILE__), 'eway_rapid', 'output', 'query_customer_response')
 require File.join(File.dirname(__FILE__), 'eway_rapid', 'output', 'query_transaction_response')
 require File.join(File.dirname(__FILE__), 'eway_rapid', 'output', 'refund_response')
+require File.join(File.dirname(__FILE__), 'eway_rapid', 'output', 'settlement_search_response')
 
 require File.join(File.dirname(__FILE__), 'eway_rapid', 'entities', 'cancel_authorisation_request')
 require File.join(File.dirname(__FILE__), 'eway_rapid', 'entities', 'cancel_authorisation_response')
@@ -34,12 +35,15 @@ require File.join(File.dirname(__FILE__), 'eway_rapid', 'entities', 'direct_paym
 require File.join(File.dirname(__FILE__), 'eway_rapid', 'entities', 'direct_payment_response')
 require File.join(File.dirname(__FILE__), 'eway_rapid', 'entities', 'direct_refund_request')
 require File.join(File.dirname(__FILE__), 'eway_rapid', 'entities', 'direct_refund_response')
+require File.join(File.dirname(__FILE__), 'eway_rapid', 'entities', 'direct_settlement_search_response')
 require File.join(File.dirname(__FILE__), 'eway_rapid', 'entities', 'transaction_search_response')
 
 require File.join(File.dirname(__FILE__), 'eway_rapid', 'message', 'convert', 'customer_to_internal_customer')
 require File.join(File.dirname(__FILE__), 'eway_rapid', 'message', 'convert', 'direct_payment_to_trans_status')
 require File.join(File.dirname(__FILE__), 'eway_rapid', 'message', 'convert', 'direct_refund_to_trans_status')
 require File.join(File.dirname(__FILE__), 'eway_rapid', 'message', 'convert', 'internal_customer_to_customer')
+require File.join(File.dirname(__FILE__), 'eway_rapid', 'message', 'convert', 'internal_settlement_to_settlement')
+require File.join(File.dirname(__FILE__), 'eway_rapid', 'message', 'convert', 'internal_summary_to_summary')
 require File.join(File.dirname(__FILE__), 'eway_rapid', 'message', 'convert', 'internal_trans_to_trans')
 require File.join(File.dirname(__FILE__), 'eway_rapid', 'message', 'convert', 'internal_transaction_to_address')
 require File.join(File.dirname(__FILE__), 'eway_rapid', 'message', 'convert', 'internal_transaction_to_status')
@@ -67,6 +71,7 @@ require File.join(File.dirname(__FILE__), 'eway_rapid', 'message', 'convert', 'r
 require File.join(File.dirname(__FILE__), 'eway_rapid', 'message', 'convert', 'response', 'direct_payment_to_create_cust')
 require File.join(File.dirname(__FILE__), 'eway_rapid', 'message', 'convert', 'response', 'direct_payment_to_create_trans')
 require File.join(File.dirname(__FILE__), 'eway_rapid', 'message', 'convert', 'response', 'direct_refund_to_refund_response')
+require File.join(File.dirname(__FILE__), 'eway_rapid', 'message', 'convert', 'response', 'direct_settlement_to_settlement')
 require File.join(File.dirname(__FILE__), 'eway_rapid', 'message', 'convert', 'response', 'search_to_query_trans')
 
 require File.join(File.dirname(__FILE__), 'eway_rapid', 'message', 'process', 'rest_process')
