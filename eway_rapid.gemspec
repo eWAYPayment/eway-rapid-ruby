@@ -16,7 +16,7 @@ Gem::Specification.new do |spec|
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'rest-client', '~> 1.8'
+  spec.add_dependency 'rest-client', '>= 1.8.0, < 3'
   spec.add_dependency 'json', '~> 1.8.3'
 
   spec.add_development_dependency 'bundler', '~> 1.10'
