@@ -110,6 +110,7 @@ module EwayRapid
     # code, invoice number, invoice reference
     #
     # @param [Enums::TransactionFilter] filter Filter definition for searching
+    # @return [QueryTransactionResponse]
     def query_transaction_by_filter(filter)
       index_of_value = filter.calculate_index_of_value
       if index_of_value.nil?

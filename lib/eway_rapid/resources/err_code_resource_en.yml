@@ -103,12 +103,22 @@
 - V6140: Merchant account is suspended
 - V6141: Invalid PayPal account details or API signature
 - V6142: Authorise not available for Bank/Branch
+- V6143: Invalid Public Key
+- V6146: Client Side Encryption Key Missing or Invalid
+- V6147: Unable to Create One Time Code for Secure Field
+- V6148: Secure Field has Expired
+- V6149: Invalid Secure Field One Time Code
 - V6150: Invalid Refund Amount
 - V6151: Refund amount greater than original transaction
 - V6152: Original transaction already refunded for total amount
 - V6153: Card type not support by merchant
 - V6160: Encryption Method Not Supported
 - V6165: Invalid Visa Checkout data or decryption failed
+- V6170: Invalid TransactionSearch, Invoice Number is not unique
+- V6171: Invalid TransactionSearch, Invoice Number not found
+- V6210: Secure Field Invalid Type
+- V6211: Secure Field Invalid Div
+- V6212: Invalid Style string for Secure Field
 # Third party error code
 - S5000: System Error
 - S5011: PayPal Connection Error
@@ -125,8 +135,8 @@
 - S9992: Communication error with Rapid API
 - S9993: Authentication error with Rapid API
 - S9994: Internal system error communicating with Rapid API
-- S9995: Internal SDK Error, Bad Parameters ...
-- S9996: Internal rapid server error (This error fire when post, get message from client to server has problem)
+- S9995: Internal SDK Error, Bad Parameters
+- S9996: Internal Rapid server error
 # Transaction response message
 - A2000: Transaction Approved
 - A2008: Honour With Identification

@@ -456,7 +456,7 @@ module EwayRapid
 
       def self.from_array(array)
         summaries = []
-        array.each {|summary_hash|
+        Array(array).each {|summary_hash|
           obj = from_hash(summary_hash)
           summaries.push(obj)
         }
@@ -488,7 +488,7 @@ module EwayRapid
 
       def self.from_array(array)
         balances = []
-        array.each {|balance_hash|
+        Array(array).each {|balance_hash|
           obj = from_hash(balance_hash)
           balances.push(obj)
         }
@@ -532,7 +532,7 @@ module EwayRapid
 
       def self.from_array(array)
         transactions = []
-        array.each {|transaction_hash|
+        Array(array).each {|transaction_hash|
           obj = from_hash(transaction_hash)
           transactions.push(obj)
         }

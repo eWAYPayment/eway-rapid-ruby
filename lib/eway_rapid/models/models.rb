@@ -244,8 +244,11 @@ module EwayRapid
       # The partner ID generated from an eWAY partner agreement
       attr_accessor :partner_id
 
-      # The wallet ID of a third party wallet used for a payment
+      # Deprecated, use secured_card_data
       attr_accessor :third_party_wallet_id
+      
+      # Card data ID, used for Secure Fields, Visa Checkout, AMEX Express Checkout and Android Pay
+      attr_accessor :secured_card_data
 
       # The Transaction ID of an authorisation to capture
       attr_accessor :auth_transaction_id

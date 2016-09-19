@@ -15,5 +15,15 @@ class SettlementSearchTest < TestBase
     assert(!search_response.settlement_transactions.nil? && search_response.settlement_transactions.length > 0)
   end
 
+  def test_invalid_input
+    @search = EwayRapid::InputModelFactory.create_settlement_search
+
+    @search.settlement_date = '2014-01-01'
+
+    search_response = @client.settlement_search(@search)
+
+    assert(!search_response.errors.nil?)
+  end
+
   def teardown; end
 end
