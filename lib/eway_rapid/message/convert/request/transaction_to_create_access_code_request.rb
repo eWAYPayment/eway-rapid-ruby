@@ -48,6 +48,8 @@ module EwayRapid
                                else
                                  Enums::RequestMethod::AUTHORISE
                                end
+
+              request.method = input.method if input.method
             end
             request
           end
