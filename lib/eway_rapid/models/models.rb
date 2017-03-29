@@ -217,6 +217,9 @@ module EwayRapid
     # a previous Authorisation transaction
     class Transaction
 
+      # The method of transaction being performned - use Enums::RequestMethod
+      attr_accessor :method
+
       # The type of transaction being performed - use Enums::TransactionType
       attr_accessor :transaction_type
 
