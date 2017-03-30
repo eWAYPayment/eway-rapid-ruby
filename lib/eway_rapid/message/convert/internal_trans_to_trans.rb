@@ -10,6 +10,7 @@ module EwayRapid
           transaction.customer = get_eway_customer(i_transaction)
           transaction.payment_details = get_payment_details(i_transaction)
           transaction.shipping_details = get_shipping_details(i_transaction)
+          transaction.token_customer_id = i_transaction.token_customer_id
           transaction.options = i_transaction.options
           transaction
         end
