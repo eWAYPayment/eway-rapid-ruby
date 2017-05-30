@@ -2,7 +2,6 @@ module EwayRapid
   class CreateAccessCodeSharedRequest
     attr_accessor :customer
     attr_accessor :shipping_address
-    attr_accessor :shipping_method
     attr_accessor :items
     attr_accessor :options
     attr_accessor :payment
@@ -27,7 +26,6 @@ module EwayRapid
       {
           Constants::CUSTOMER               => InternalModels::Customer.to_hash(customer),
           Constants::SHIPPING_ADDRESS       => InternalModels::ShippingAddress.to_hash(shipping_address),
-          Constants::SHIPPING_METHOD        => shipping_method,
           Constants::ITEMS                  => Models::LineItem.to_array(items),
           Constants::OPTIONS                => InternalModels::Option.to_array(options),
           Constants::PAYMENT                => InternalModels::Payment.to_hash(payment),
