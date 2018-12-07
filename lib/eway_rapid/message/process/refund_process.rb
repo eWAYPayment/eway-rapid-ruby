@@ -15,10 +15,10 @@ module EwayRapid
 
         # @param [DirectRefundRequest] request
         # @return [String]
-        def self.send_request(url, api_key, password, request)
+        def self.send_request(url, api_key, password, version, request)
           url = url + '/' + request.refund.original_transaction_id.to_s + '/' + Constants::REFUND_SUB_PATH_METHOD
           url = URI.encode(url)
-          RefundMsgProcess.new.do_post(url, api_key, password, request)
+          RefundMsgProcess.new.do_post(url, api_key, password, version, request)
         end
 
         # @param [String] response
@@ -49,8 +49,8 @@ module EwayRapid
           request
         end
 
-        def self.send_request(url, api_key, password, request)
-          CancelAuthorisationMsgProcess.new.do_post(url, api_key, password, request)
+        def self.send_request(url, api_key, password, version, request)
+          CancelAuthorisationMsgProcess.new.do_post(url, api_key, password, version, request)
         end
 
         # @param [String] response

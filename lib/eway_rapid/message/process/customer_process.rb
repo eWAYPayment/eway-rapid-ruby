@@ -23,9 +23,9 @@ module EwayRapid
         # @param [String] password
         # @param [DirectPaymentRequest] request
         # @return [String]
-        def self.send_request(url, api_key, password, request)
+        def self.send_request(url, api_key, password, version, request)
           begin
-            CustDirectPaymentMsgProcess.new.do_post(url, api_key, password, request)
+            CustDirectPaymentMsgProcess.new.do_post(url, api_key, password, version, request)
           rescue SocketError => e
             raise Exceptions::CommunicationFailureException.new(e.message)
           rescue RestClient::Exception => e
@@ -68,8 +68,8 @@ module EwayRapid
         # @param [String] password
         # @param [CreateAccessCodeSharedRequest] request
         # @return [String]
-        def self.send_request(url, api_key, password, request)
-          CustResponsiveSharedMsgProcess.new.do_post(url, api_key, password, request)
+        def self.send_request(url, api_key, password, version, request)
+          CustResponsiveSharedMsgProcess.new.do_post(url, api_key, password, version, request)
         end
 
         # @param [String] response
@@ -102,8 +102,8 @@ module EwayRapid
         # @param [String] password
         # @param [CreateAccessCodeRequest] request
         # @return [String]
-        def self.send_request(url, api_key, password, request)
-          CustTransparentRedirectMsgProcess.new.do_post(url, api_key, password, request)
+        def self.send_request(url, api_key, password, version, request)
+          CustTransparentRedirectMsgProcess.new.do_post(url, api_key, password, version, request)
         end
 
         # @param [String] response
@@ -129,8 +129,8 @@ module EwayRapid
 
         # @param [DirectCustomerSearchRequest] request
         # @return [String]
-        def self.send_request(url, api_key, password, request)
-          QueryCustomerMsgProcess.new.do_post(url, api_key, password, request)
+        def self.send_request(url, api_key, password, version, request)
+          QueryCustomerMsgProcess.new.do_post(url, api_key, password, version, request)
         end
 
         # @param [String] response
@@ -165,8 +165,8 @@ module EwayRapid
         # @param [String] api_key
         # @param [String] password
         # @param [DirectPaymentRequest] request
-        def self.send_request(url, api_key, password, request)
-          CustDirectUpdateMsgProcess.new.do_post(url, api_key, password, request)
+        def self.send_request(url, api_key, password, version, request)
+          CustDirectUpdateMsgProcess.new.do_post(url, api_key, password, version, request)
         end
 
         # @param [String] response
@@ -202,8 +202,8 @@ module EwayRapid
         # @param [String] api_key
         # @param [String] password
         # @param [CreateAccessCodeSharedRequest] request
-        def self.send_request(url, api_key, password, request)
-          CustResponsiveUpdateMsgProcess.new.do_post(url, api_key, password, request)
+        def self.send_request(url, api_key, password, version, request)
+          CustResponsiveUpdateMsgProcess.new.do_post(url, api_key, password, version, request)
         end
 
         # @param [String] response
@@ -238,8 +238,8 @@ module EwayRapid
         # @param [String] api_key
         # @param [String] password
         # @param [CreateAccessCodeRequest] request
-        def self.send_request(url, api_key, password, request)
-          CustTransparentUpdateMsgProcess.new.do_post(url, api_key, password, request)
+        def self.send_request(url, api_key, password, version, request)
+          CustTransparentUpdateMsgProcess.new.do_post(url, api_key, password, version, request)
         end
 
         # @param [String] response

@@ -290,6 +290,30 @@ module EwayRapid
       # The URL of the merchant's logo to display on the Responsive Shared Page
       attr_accessor :logo_url
 
+      # (v40+ only) A token used to configure AMEX Express Checkout
+      attr_accessor :amex_ec_data
+
+      # (v40+ query response only) The date and time the transaction took place
+      attr_accessor :transaction_date_time
+
+      # (v40+ query response only) True if funds were captured in the transaction
+      attr_accessor :transaction_captured
+
+      # (v40+ query response only) Reserved for future use
+      attr_accessor :source
+
+      # (v40+ query response only) The maximum amount that could be refunded from this transaction
+      attr_accessor :max_refund
+
+      # (v40+ query response only) Contains the original transaction ID if the queried transaction is a refund
+      attr_accessor :original_transaction_id
+
+      # (v40+ query response only) The fraud action that occurred if any. One of NotChallenged, Allow, Review, PreAuth, Processed, Approved, Block
+      attr_accessor :fraud_action
+
+      #(v40+ query response only) The ISO 4217 numeric currency code (e.g. AUD = 036)
+      attr_accessor :currency_code
+
       alias_method :customer_read_only?, :customer_read_only
       alias_method :checkout_payment?, :checkout_payment
       alias_method :verify_customer_phone?, :verify_customer_phone
@@ -310,6 +334,15 @@ module EwayRapid
       attr_accessor :fraud_action
       attr_accessor :verification_result
       attr_accessor :processing_details
+
+      # (v40+ query response only)
+      attr_accessor :transaction_date_time
+      attr_accessor :transaction_captured
+      attr_accessor :source
+      attr_accessor :max_refund
+      attr_accessor :original_transaction_id
+      attr_accessor :fraud_action
+      attr_accessor :currency_code
 
       alias_method :status?, :status
     end

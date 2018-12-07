@@ -24,6 +24,11 @@ class QueryTransactionTest < TestBase
     query = @client.query_transaction_by_id(transaction_id)
     assert_equal(transaction_id, query.transaction_status.transaction_id)
     assert(query.errors.nil? || query.errors.length == 0)
+
+    if (IntegrationTest.get_version >= 40)
+      assert_not_empty(query.transaction_status.transaction_date_time)
+    end
+
   end
 
   def test_blank_input

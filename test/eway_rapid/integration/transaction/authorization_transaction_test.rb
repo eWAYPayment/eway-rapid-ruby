@@ -13,6 +13,7 @@ class AuthorizationTransactionTest < TestBase
     customer.address = address
     @transaction.customer = customer
     @transaction.payment_details = payment_details
+    @transaction.capture = false
   end
 
   def teardown
@@ -40,6 +41,6 @@ class AuthorizationTransactionTest < TestBase
     auth_response = @client.create_transaction(EwayRapid::Enums::PaymentMethod::AUTHORISATION, @transaction)
     @transaction.auth_transaction_id = auth_response.transaction_status.transaction_id
     auth_response2 = @client.create_transaction(EwayRapid::Enums::PaymentMethod::AUTHORISATION, @transaction)
-    assert(auth_response2.transaction_status.status)
+    assert(!auth_response2.transaction_status.status)
   end
 end

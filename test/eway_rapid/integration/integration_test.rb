@@ -7,6 +7,16 @@ class IntegrationTest
 
   # @return [RapidClient]
   def self.get_sandbox_client
-    EwayRapid::RapidClient.new(API_KEY, PASSWORD, SANDBOX_ENDPOINT)
+    client = EwayRapid::RapidClient.new(API_KEY, PASSWORD, SANDBOX_ENDPOINT)
+    client.set_version(IntegrationTest.get_version)
+    client
+  end
+
+  def self.get_version
+    if (ENV["EWAY_API_VERSION"])
+      return ENV["EWAY_API_VERSION"]
+    else
+      return 31;
+    end
   end
 end

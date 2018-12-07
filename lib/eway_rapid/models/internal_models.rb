@@ -334,6 +334,13 @@ module EwayRapid
       attr_accessor :customer
       attr_accessor :shipping_address
       attr_accessor :beagle_verification
+      attr_accessor :transaction_date_time
+      attr_accessor :transaction_captured
+      attr_accessor :source
+      attr_accessor :max_refund
+      attr_accessor :original_transaction_id
+      attr_accessor :fraud_action
+      attr_accessor :currency_code
       attr_accessor :errors
 
       def to_json(opts={})
@@ -353,7 +360,13 @@ module EwayRapid
         hash[Constants::VERIFICATION] = verification if verification
         hash[Constants::CUSTOMER] = customer if customer
         hash[Constants::SHIPPING_ADDRESS] = shipping_address if shipping_address
-        hash[Constants::BEAGLE_VERIFICATION] = beagle_verification if beagle_verification
+        hash[Constants::TRANSACTION_DATE] = transaction_date_time if transaction_date_time
+        hash[Constants::TRANSACTION_CAPTURED] = transaction_captured if transaction_captured
+        hash[Constants::SOURCE] = source if source
+        hash[Constants::MAX_REFUND] = max_refund if max_refund
+        hash[Constants::ORIGINAL_TRANSACTION] = original_transaction_id if original_transaction_id
+        hash[Constants::FRAUD_ACTION] = fraud_action if fraud_action
+        hash[Constants::CURRENCY_CODE] = currency_code if currency_code
         hash[Constants::ERRORS] = errors if errors
         hash.to_json
       end
@@ -381,6 +394,13 @@ module EwayRapid
         transaction.customer = Customer.from_hash(hash[Constants::CUSTOMER])
         transaction.shipping_address = ShippingAddress.from_hash(hash[Constants::SHIPPING_ADDRESS])
         transaction.beagle_verification = BeagleVerification.from_hash(hash[Constants::BEAGLE_VERIFICATION])
+        transaction.transaction_date_time = hash[Constants::TRANSACTION_DATE]
+        transaction.transaction_captured = hash[Constants::TRANSACTION_CAPTURED]
+        transaction.source = hash[Constants::SOURCE]
+        transaction.max_refund = hash[Constants::MAX_REFUND]
+        transaction.original_transaction_id = hash[Constants::ORIGINAL_TRANSACTION]
+        transaction.fraud_action = hash[Constants::FRAUD_ACTION]
+        transaction.currency_code = hash[Constants::CURRENCY_CODE]
         transaction.errors = hash[Constants::ERRORS]
         transaction
       end

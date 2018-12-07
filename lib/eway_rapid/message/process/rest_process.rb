@@ -8,7 +8,7 @@ module EwayRapid
       # @param [String] api_key rapid api key
       # @param [String] password rapid password
       # @param [String] request object to post
-      def do_post(url, api_key, password, request)
+      def do_post(url, api_key, password, version, request)
         begin
           RestClient::Request.execute(
             :method => :post,
@@ -17,10 +17,12 @@ module EwayRapid
             :password => password,
             :payload => request.to_json,
             :timeout => 9000000,
+            :ssl_version => 'TLSv1_2',
             :headers => {
                 :accept => :json,
                 :content_type => :json,
-                :user_agent => get_user_agent
+                :user_agent => get_user_agent,
+                :'X-EWAY-APIVERSION' => version
             }
           )
         rescue SocketError => e
@@ -39,17 +41,19 @@ module EwayRapid
       # @param [String] url rapid endpoint url
       # @param [String] api_key rapid api key
       # @param [String] password rapid password
-      def do_get(url, api_key, password)
+      def do_get(url, api_key, password, version)
         begin
           RestClient::Request.new(
               :method => :get,
               :url => url,
               :user => api_key,
               :password => password,
+              :ssl_version => 'TLSv1_2',
               :headers => {
                   :accept => :json,
                   :content_type => :json,
-                  :user_agent => get_user_agent
+                  :user_agent => get_user_agent,
+                  :'X-EWAY-APIVERSION' => version
               }
           ).execute
         rescue SocketError => e

@@ -18,6 +18,7 @@ module EwayRapid
             transaction_response.errors = response.errors.split(/\s*,\s*/) if response.errors
             transaction_response.access_code = response.access_code
             transaction_response.form_action_url = response.form_action_url
+            transaction_response.amex_ec_data = response.amex_ec_data
             transaction_response
           end
         end

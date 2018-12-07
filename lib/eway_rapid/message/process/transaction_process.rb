@@ -18,8 +18,8 @@ module EwayRapid
         # @param [String] password
         # @param [DirectPaymentRequest] request
         # @return [String]
-        def self.send_request(url, api_key, password, request)
-          TransDirectPaymentMsgProcess.new.do_post(url, api_key, password, request)
+        def self.send_request(url, api_key, password, version, request)
+          TransDirectPaymentMsgProcess.new.do_post(url, api_key, password, version, request)
         end
 
         # @param [String] response
@@ -47,8 +47,8 @@ module EwayRapid
         # @param [String] password
         # @param [CreateAccessCodeSharedRequest] request
         # @return [String]
-        def self.send_request(url, api_key, password, request)
-          TransResponsiveSharedMsgProcess.new.do_post(url, api_key, password, request)
+        def self.send_request(url, api_key, password, version, request)
+          TransResponsiveSharedMsgProcess.new.do_post(url, api_key, password, version, request)
         end
 
         # @param [String] response
@@ -76,8 +76,8 @@ module EwayRapid
         # @param [String] password
         # @param [CreateAccessCodeRequest] request
         # @return [String]
-        def self.send_request(url, api_key, password, request)
-          TransTransparentRedirectMsgProcess.new.do_post(url, api_key, password, request)
+        def self.send_request(url, api_key, password, version, request)
+          TransTransparentRedirectMsgProcess.new.do_post(url, api_key, password, version, request)
         end
 
         # @param [String] response
@@ -105,8 +105,8 @@ module EwayRapid
         # @param [String] password
         # @param [CapturePaymentRequest] request
         # @return [String]
-        def self.send_request(url, api_key, password, request)
-          CapturePaymentMsgProcess.new.do_post(url, api_key, password, request)
+        def self.send_request(url, api_key, password, version, request)
+          CapturePaymentMsgProcess.new.do_post(url, api_key, password, version, request)
         end
 
         # @param [String] response
@@ -122,8 +122,8 @@ module EwayRapid
       class TransQueryMsgProcess
         include RestProcess
 
-        def self.process_post_msg(url, api_key, password)
-          TransQueryMsgProcess.new.do_get(url, api_key, password)
+        def self.process_post_msg(url, api_key, password, version)
+          TransQueryMsgProcess.new.do_get(url, api_key, password, version)
         end
 
         # @param [String] response
@@ -148,8 +148,8 @@ module EwayRapid
           URI.encode_www_form(hash)
         end
 
-        def self.send_request(url, api_key, password)
-          SettlementSearchMsgProcess.new.do_get(url, api_key, password)
+        def self.send_request(url, api_key, password, version)
+          SettlementSearchMsgProcess.new.do_get(url, api_key, password, version)
         end
 
         def self.make_result(response)

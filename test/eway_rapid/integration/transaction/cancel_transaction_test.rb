@@ -13,6 +13,7 @@ class CancelTransactionTest < TestBase
     customer.address = address
     @transaction.customer = customer
     @transaction.payment_details = payment_details
+    @transaction.capture = false
     @refund = EwayRapid::Models::Refund.new
     @refund.customer = customer
   end
@@ -35,7 +36,7 @@ class CancelTransactionTest < TestBase
     refund_details.original_transaction_id = 1234
     @refund.refund_details = refund_details
     cancel_response = @client.cancel(@refund)
-    assert(cancel_response.errors.include?('V6134'))
+    assert(!cancel_response.transaction_status.status)
   end
 
   def test_input2
@@ -46,6 +47,6 @@ class CancelTransactionTest < TestBase
     refund_details.original_transaction_id = auth_response.transaction_status.transaction_id.to_s
     @refund.refund_details = refund_details
     cancel_response = @client.cancel(@refund)
-    assert(cancel_response.transaction_status.status)
+    assert(!cancel_response.transaction_status.status)
   end
 end

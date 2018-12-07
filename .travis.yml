@@ -9,6 +9,10 @@ rvm:
   - 2.5
   - jruby-19mode
 
+env:
+ - EWAY_API_VERSION=31
+ - EWAY_API_VERSION=40
+
 before_install: gem install bundler -v 1.10.6
 
 sudo: false

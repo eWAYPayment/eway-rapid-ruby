@@ -16,6 +16,7 @@ module EwayRapid
       @api_key = api_key
       @password = password
       @rapid_endpoint = rapid_endpoint
+      @version = 31
 
       validate_api_param
     end
@@ -29,6 +30,13 @@ module EwayRapid
       @password = password
 
       validate_api_param
+    end
+
+    # Sets the Rapid API version to use (e.g. 40)
+    #
+    # @param [Integer] version eWAY Rapid API version
+    def set_version(version)
+      @version = version
     end
 
     # Creates a transaction either using an authorisation, the responsive shared
@@ -47,39 +55,39 @@ module EwayRapid
           url = @web_url + Constants::DIRECT_PAYMENT_METHOD_NAME + Constants::JSON_SUFFIX
 
           request = Message::TransactionProcess::TransDirectPaymentMsgProcess.create_request(transaction)
-          response = Message::TransactionProcess::TransDirectPaymentMsgProcess.send_request(url, @api_key, @password, request)
+          response = Message::TransactionProcess::TransDirectPaymentMsgProcess.send_request(url, @api_key, @password, @version, request)
           Message::TransactionProcess::TransDirectPaymentMsgProcess.make_result(response)
         when Enums::PaymentMethod::RESPONSIVE_SHARED
           url = @web_url + Constants::RESPONSIVE_SHARED_METHOD_NAME + Constants::JSON_SUFFIX
 
           request = Message::TransactionProcess::TransResponsiveSharedMsgProcess.create_request(transaction)
-          response = Message::TransactionProcess::TransResponsiveSharedMsgProcess.send_request(url, @api_key, @password, request)
+          response = Message::TransactionProcess::TransResponsiveSharedMsgProcess.send_request(url, @api_key, @password, @version, request)
           Message::TransactionProcess::TransResponsiveSharedMsgProcess.make_result(response)
         when Enums::PaymentMethod::TRANSPARENT_REDIRECT
           url = @web_url + Constants::TRANSPARENT_REDIRECT_METHOD_NAME + Constants::JSON_SUFFIX
 
           request = Message::TransactionProcess::TransTransparentRedirectMsgProcess.create_request(transaction)
-          response = Message::TransactionProcess::TransTransparentRedirectMsgProcess.send_request(url, @api_key, @password, request)
+          response = Message::TransactionProcess::TransTransparentRedirectMsgProcess.send_request(url, @api_key, @password, @version, request)
           Message::TransactionProcess::TransTransparentRedirectMsgProcess.make_result(response)
         when Enums::PaymentMethod::WALLET
           if transaction.capture
             url = @web_url + Constants::DIRECT_PAYMENT_METHOD_NAME + Constants::JSON_SUFFIX
 
             request = Message::TransactionProcess::TransDirectPaymentMsgProcess.create_request(transaction)
-            response = Message::TransactionProcess::TransDirectPaymentMsgProcess.send_request(url, @api_key, @password, request)
+            response = Message::TransactionProcess::TransDirectPaymentMsgProcess.send_request(url, @api_key, @password, @version, request)
             Message::TransactionProcess::TransDirectPaymentMsgProcess.make_result(response)
           else
             url = @web_url + Constants::CAPTURE_PAYMENT_METHOD
 
             request = Message::TransactionProcess::CapturePaymentMsgProcess.create_request(transaction)
-            response = Message::TransactionProcess::CapturePaymentMsgProcess.send_request(url, @api_key, @password, request)
+            response = Message::TransactionProcess::CapturePaymentMsgProcess.send_request(url, @api_key, @password, @version, request)
             Message::TransactionProcess::CapturePaymentMsgProcess.make_result(response)
           end
         when Enums::PaymentMethod::AUTHORISATION
           url = @web_url + Constants::CAPTURE_PAYMENT_METHOD
 
           request = Message::TransactionProcess::CapturePaymentMsgProcess.create_request(transaction)
-          response = Message::TransactionProcess::CapturePaymentMsgProcess.send_request(url, @api_key, @password, request)
+          response = Message::TransactionProcess::CapturePaymentMsgProcess.send_request(url, @api_key, @password, @version, request)
           Message::TransactionProcess::CapturePaymentMsgProcess.make_result(response)
         else
           make_response_with_exception(Exceptions::ParameterInvalidException.new('Unsupported payment type'), CreateTransactionResponse)
@@ -144,7 +152,7 @@ module EwayRapid
         url = @web_url + Constants::TRANSACTION_METHOD
 
         request = Message::RefundProcess::RefundMsgProcess.create_request(refund)
-        response = Message::RefundProcess::RefundMsgProcess.send_request(url, @api_key, @password, request)
+        response = Message::RefundProcess::RefundMsgProcess.send_request(url, @api_key, @password, @version, request)
         Message::RefundProcess::RefundMsgProcess.make_result(response)
       rescue => e
         @logger.error(e.to_s) if @logger
@@ -164,7 +172,7 @@ module EwayRapid
         url = @web_url + Constants::CANCEL_AUTHORISATION_METHOD
 
         request = Message::RefundProcess::CancelAuthorisationMsgProcess.create_request(refund)
-        response = Message::RefundProcess::CancelAuthorisationMsgProcess.send_request(url, @api_key, @password, request)
+        response = Message::RefundProcess::CancelAuthorisationMsgProcess.send_request(url, @api_key, @password, @version, request)
         Message::RefundProcess::CancelAuthorisationMsgProcess.make_result(response)
       rescue => e
         @logger.error(e.to_s) if @logger
@@ -188,19 +196,19 @@ module EwayRapid
           url = @web_url + Constants::DIRECT_PAYMENT_METHOD_NAME + Constants::JSON_SUFFIX
 
           request = Message::CustomerProcess::CustDirectPaymentMsgProcess.create_request(customer)
-          response = Message::CustomerProcess::CustDirectPaymentMsgProcess.send_request(url, @api_key, @password, request)
+          response = Message::CustomerProcess::CustDirectPaymentMsgProcess.send_request(url, @api_key, @password, @version, request)
           Message::CustomerProcess::CustDirectPaymentMsgProcess.make_result(response)
         when Enums::PaymentMethod::RESPONSIVE_SHARED
           url = @web_url + Constants::RESPONSIVE_SHARED_METHOD_NAME + Constants::JSON_SUFFIX
 
           request = Message::CustomerProcess::CustResponsiveSharedMsgProcess.create_request(customer)
-          response = Message::CustomerProcess::CustResponsiveSharedMsgProcess.send_request(url, @api_key, @password, request)
+          response = Message::CustomerProcess::CustResponsiveSharedMsgProcess.send_request(url, @api_key, @password, @version, request)
           Message::CustomerProcess::CustResponsiveSharedMsgProcess.make_result(response)
         when Enums::PaymentMethod::TRANSPARENT_REDIRECT
           url = @web_url + Constants::TRANSPARENT_REDIRECT_METHOD_NAME + Constants::JSON_SUFFIX
 
           request = Message::CustomerProcess::CustTransparentRedirectMsgProcess.create_request(customer)
-          response = Message::CustomerProcess::CustTransparentRedirectMsgProcess.send_request(url, @api_key, @password, request)
+          response = Message::CustomerProcess::CustTransparentRedirectMsgProcess.send_request(url, @api_key, @password, @version, request)
           Message::CustomerProcess::CustTransparentRedirectMsgProcess.make_result(response)
         else
           make_response_with_exception(Exceptions::ParameterInvalidException.new('Unsupported payment type'), CreateCustomerResponse)
@@ -225,19 +233,19 @@ module EwayRapid
         when Enums::PaymentMethod::DIRECT
           url = @web_url + Constants::DIRECT_PAYMENT_METHOD_NAME + Constants::JSON_SUFFIX
           request = Message::CustomerProcess::CustDirectUpdateMsgProcess.create_request(customer)
-          response = Message::CustomerProcess::CustDirectUpdateMsgProcess.send_request(url, @api_key, @password, request)
+          response = Message::CustomerProcess::CustDirectUpdateMsgProcess.send_request(url, @api_key, @password, @version, request)
           Message::CustomerProcess::CustDirectUpdateMsgProcess.make_result(response)
         when Enums::PaymentMethod::RESPONSIVE_SHARED
           url = @web_url + Constants::RESPONSIVE_SHARED_METHOD_NAME + Constants::JSON_SUFFIX
 
           request = Message::CustomerProcess::CustResponsiveUpdateMsgProcess.create_request(customer)
-          response = Message::CustomerProcess::CustResponsiveUpdateMsgProcess.send_request(url, @api_key, @password, request)
+          response = Message::CustomerProcess::CustResponsiveUpdateMsgProcess.send_request(url, @api_key, @password, @version, request)
           Message::CustomerProcess::CustResponsiveUpdateMsgProcess.make_result(response)
         when Enums::PaymentMethod::TRANSPARENT_REDIRECT
           url = @web_url + Constants::TRANSPARENT_REDIRECT_METHOD_NAME + Constants::JSON_SUFFIX
 
           request = Message::CustomerProcess::CustTransparentUpdateMsgProcess.create_request(customer)
-          response = Message::CustomerProcess::CustTransparentUpdateMsgProcess.send_request(url, @api_key, @password, request)
+          response = Message::CustomerProcess::CustTransparentUpdateMsgProcess.send_request(url, @api_key, @password, @version, request)
           Message::CustomerProcess::CustTransparentUpdateMsgProcess.make_result(response)
         else
           return make_response_with_exception(Exceptions::ParameterInvalidException.new('Unsupported payment type'), CreateCustomerResponse)
@@ -263,7 +271,7 @@ module EwayRapid
         url = URI.encode(url)
 
         request = Message::CustomerProcess::QueryCustomerMsgProcess.create_request(token_customer_id.to_s)
-        response = Message::CustomerProcess::QueryCustomerMsgProcess.send_request(url, @api_key, @password, request)
+        response = Message::CustomerProcess::QueryCustomerMsgProcess.send_request(url, @api_key, @password, @version, request)
         Message::CustomerProcess::QueryCustomerMsgProcess.make_result(response)
       rescue => e
         @logger.error(e.to_s) if @logger
@@ -284,7 +292,7 @@ module EwayRapid
         request = Message::TransactionProcess::SettlementSearchMsgProcess.create_request(search_request)
         url = @web_url + Constants::SETTLEMENT_SEARCH_METHOD +  request
 
-        response = Message::TransactionProcess::SettlementSearchMsgProcess.send_request(url, @api_key, @password)
+        response = Message::TransactionProcess::SettlementSearchMsgProcess.send_request(url, @api_key, @password, @version)
         Message::TransactionProcess::SettlementSearchMsgProcess.make_result(response)
 
       rescue => e
@@ -335,7 +343,7 @@ module EwayRapid
         end
         url = URI.encode(url)
 
-        response = Message::TransactionProcess::TransQueryMsgProcess.process_post_msg(url, @api_key, @password)
+        response = Message::TransactionProcess::TransQueryMsgProcess.process_post_msg(url, @api_key, @password, @version)
         Message::TransactionProcess::TransQueryMsgProcess.make_result(response)
       rescue => e
         @logger.error(e.to_s) if @logger

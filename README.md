@@ -9,10 +9,6 @@ A Ruby Gem to integrate with eWAY's Rapid Payment API.
 Sign up with eWAY at:
  - Australia:    https://www.eway.com.au/
  - New Zealand:  https://eway.io/nz/
- - UK:           https://eway.io/uk/
- - Hong Kong:    https://eway.io/hk/
- - Malaysia:     https://eway.io/my/
- - Singapore:    https://eway.io/sg/
 
 For testing, get a free eWAY Partner account: https://www.eway.com.au/developers
 

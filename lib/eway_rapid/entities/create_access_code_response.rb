@@ -37,6 +37,7 @@ module EwayRapid
     attr_accessor :card_start_month
     attr_accessor :card_start_year
     attr_accessor :card_issue_number
+    attr_accessor :amex_ec_data
 
     def to_json(options={})
       {Constants::CUSTOMER               => customer,
@@ -75,7 +76,8 @@ module EwayRapid
        Constants::CARD_EXPIRY_YEAR       => card_expiry_year,
        Constants::CARD_START_MONTH       => card_start_month,
        Constants::CARD_START_YEAR        => card_start_year,
-       Constants::CARD_ISSUE_NUMBER      => card_issue_number}.to_json
+       Constants::CARD_ISSUE_NUMBER      => card_issue_number,
+       Constants::AMEX_EC_DATA           => amex_ec_data}.to_json
     end
 
     def self.from_json(json)
@@ -122,6 +124,7 @@ module EwayRapid
       create_access_code_response.card_start_month = hash[Constants::CARD_START_MONTH]
       create_access_code_response.card_start_year = hash[Constants::CARD_START_YEAR]
       create_access_code_response.card_issue_number = hash[Constants::CARD_ISSUE_NUMBER]
+      create_access_code_response.amex_ec_data = hash[Constants::AMEX_EC_DATA]
       create_access_code_response
     end
   end

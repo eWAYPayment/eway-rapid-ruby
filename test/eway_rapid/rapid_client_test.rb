@@ -13,6 +13,20 @@ class RapidClientTest < TestBase
     assert_equal(errors.length, 0)
   end
 
+  def test_set_rapid_version
+    api_key = 'skjskj'
+    password = 'uncover'
+    endpoint = 'https://api.sandbox.ewaypayments.com/'
+
+    client = EwayRapid::RapidClient.new(api_key, password, endpoint)
+
+    client.set_version(40)
+    errors = client.get_errors
+
+    assert(client.get_valid?)
+    assert_equal(errors.length, 0)
+  end
+
   def test_invalid_rapid_endpoint
     api_key = 'skjskj'
     password = 'uncover'

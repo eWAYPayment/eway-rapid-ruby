@@ -12,6 +12,14 @@ module EwayRapid
           transaction_status.total = transaction.total_amount
           transaction_status.processing_details = get_processing_details(transaction)
           transaction_status.verification_result = get_verification_result(transaction)
+          transaction_status.transaction_date_time = transaction.transaction_date_time
+          transaction_status.transaction_captured = transaction.transaction_captured
+          transaction_status.source = transaction.source
+          transaction_status.max_refund = transaction.max_refund
+          transaction_status.original_transaction_id = transaction.original_transaction_id
+          transaction_status.fraud_action = transaction.fraud_action
+          transaction_status.currency_code = transaction.currency_code
+
           begin
             transaction_status.transaction_id = Integer(transaction.transaction_id) if transaction.transaction_id
           rescue

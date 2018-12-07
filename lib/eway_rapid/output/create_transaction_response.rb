@@ -20,5 +20,8 @@ module EwayRapid
     # and Responsive Shared)
     attr_accessor :access_code
 
+    # (v40+ only) A token used to configure AMEX Express Checkout
+    attr_accessor :amex_ec_data
+
   end
 end
