@@ -314,6 +314,12 @@ module EwayRapid
       #(v40+ query response only) The ISO 4217 numeric currency code (e.g. AUD = 036)
       attr_accessor :currency_code
 
+      # Set to true to create a token customer when the transaction is complete
+      attr_accessor :save_customer
+
+      # An eWAY-issued ID that represents the Token customer that was loaded or created for this transaction (if applicable)
+      attr_accessor :token_customer_id
+
       alias_method :customer_read_only?, :customer_read_only
       alias_method :checkout_payment?, :checkout_payment
       alias_method :verify_customer_phone?, :verify_customer_phone

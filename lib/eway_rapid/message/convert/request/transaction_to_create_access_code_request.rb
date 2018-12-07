@@ -44,7 +44,11 @@ module EwayRapid
               end
 
               request.method = if transaction.capture
-                                 Enums::RequestMethod::PROCESS_PAYMENT
+                                 if transaction.customer && (transaction.customer.token_customer_id || transaction.save_customer)
+                                   Enums::RequestMethod::TOKEN_PAYMENT
+                                 else
+                                   Enums::RequestMethod::PROCESS_PAYMENT
+                                 end
                                else
                                  Enums::RequestMethod::AUTHORISE
                                end
