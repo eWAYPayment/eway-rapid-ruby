@@ -63,6 +63,10 @@ module EwayRapid
       card_details
     end
 
+    def self.create_secured_card_data
+      'foo'
+    end
+
     def self.create_internal_customer
       customer = InternalModels::Customer.new
       customer.token_customer_id = '123456789'

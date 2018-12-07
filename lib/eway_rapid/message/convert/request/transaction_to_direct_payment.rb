@@ -30,6 +30,7 @@ module EwayRapid
             request.device_id = input.device_id
             request.partner_id = input.partner_id
             request.transaction_type = input.transaction_type || ''
+            request.secured_card_data = input.secured_card_data
             request.method = if input.capture
                                Enums::RequestMethod::PROCESS_PAYMENT
                              else
