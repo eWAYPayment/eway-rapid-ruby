@@ -14,7 +14,7 @@ class IntegrationTest
 
   def self.get_version
     if (ENV["EWAY_API_VERSION"])
-      return ENV["EWAY_API_VERSION"]
+      return ENV["EWAY_API_VERSION"].to_i
     else
       return 31;
     end
