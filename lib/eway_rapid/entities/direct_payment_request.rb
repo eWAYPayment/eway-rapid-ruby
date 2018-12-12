@@ -7,6 +7,7 @@ module EwayRapid
     attr_accessor :payment
     attr_accessor :method
     attr_accessor :transaction_type
+    attr_accessor :secured_card_data
     attr_accessor :customer_ip
     attr_accessor :device_id
     attr_accessor :partner_id
@@ -20,6 +21,7 @@ module EwayRapid
        Constants::PAYMENT            => InternalModels::Payment.to_hash(payment),
        Constants::METHOD             => method,
        Constants::TRANSACTION_TYPE   => transaction_type,
+       Constants::SECURED_CARD_DATA  => secured_card_data,
        Constants::CUSTOMER_DEVICE_IP => customer_ip,
        Constants::DEVICE_ID          => device_id,
        Constants::PARTNER_ID         => partner_id,

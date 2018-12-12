@@ -17,6 +17,7 @@ module EwayRapid
             @input.customer = customer
             @input.payment_details = payment_details
             @input.transaction_type = Enums::TransactionType::PURCHASE
+            @input.secured_card_data = ObjectCreator.create_secured_card_data
             @input.capture = true
           end
 
@@ -26,6 +27,7 @@ module EwayRapid
             assert_equal('John', request.customer.first_name)
             assert_equal('Level 5', request.customer.street1)
             assert_equal('12',request.customer.card_details.expiry_month)
+            assert_equal(@input.secured_card_data,request.secured_card_data)
             assert_equal(Enums::TransactionType::PURCHASE,request.transaction_type)
           end
         end

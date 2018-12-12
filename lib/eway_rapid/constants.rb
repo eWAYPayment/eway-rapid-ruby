@@ -75,6 +75,7 @@ module EwayRapid
     CHECKOUT_PAYMENT = 'CheckoutPayment'
     CHECKOUT_URL = 'CheckoutUrl'
     TRANSACTION_TYPE = 'TransactionType'
+    SECURED_CARD_DATA = 'SecuredCardData'
     PARTNER_ID = 'PartnerID'
     TRANSACTIONS = 'Transactions'
     ERRORS_CAPITALIZED = 'Errors'
