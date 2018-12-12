@@ -39,7 +39,7 @@ module EwayRapid
               option_convert = TransactionToArrOption.new
               request.options = option_convert.do_convert(transaction)
 
-              if transaction.shipping_details && transaction.shipping_details.shipping_method
+              if transaction.shipping_details&.shipping_method
                 request.shipping_method = transaction.shipping_details.shipping_method
               end
 
