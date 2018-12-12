@@ -24,7 +24,7 @@ module EwayRapid
 
                   # @type [String]
                   street = cust.street1
-                  if street&.strip
+                  if street && street.strip
                     arr = street.split(',', 2)
                     result.street1 = street.split(',', 2).first
                     result.street2 = street.split(',', 2).last if arr.length > 1
