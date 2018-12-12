@@ -14,7 +14,7 @@ For testing, get a free eWAY Partner account: https://www.eway.com.au/developers
 
 ## Installation
 
-The eWAY Ruby Gem requires Ruby 1.9.3 or better, it also requires the rest-client and json gems.
+The eWAY Ruby Gem requires Ruby 2.0.0 or better, it also requires the rest-client and json gems.
 
 Add this line to your application's Gemfile:
 
