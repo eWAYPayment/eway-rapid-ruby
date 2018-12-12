@@ -82,6 +82,7 @@ module EwayRapid
       attr_accessor :redirect_url
       attr_accessor :cancel_url
       attr_accessor :customer_device_ip
+      attr_accessor :secured_card_data
     end
 
     # Item information
