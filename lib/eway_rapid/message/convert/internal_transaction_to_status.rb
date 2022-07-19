@@ -14,7 +14,7 @@ module EwayRapid
           transaction_status.verification_result = get_verification_result(transaction)
           transaction_status.transaction_date_time = transaction.transaction_date_time
           transaction_status.transaction_captured = transaction.transaction_captured
-          transaction_status.transaction_type = transaction.transaction_type
+          transaction_status.transaction_type = get_transaction_type(transaction.transaction_type)
           transaction_status.source = transaction.source
           transaction_status.max_refund = transaction.max_refund
           transaction_status.original_transaction_id = transaction.original_transaction_id
@@ -54,6 +54,15 @@ module EwayRapid
           begin
             index = Integer(status)
             Enums::BeagleVerifyStatus.calculate_beagle_status(index)
+          rescue StandardError
+            return nil
+          end
+        end
+
+        def get_transaction_type(transaction_type)
+          begin
+            index = Integer(transaction_type)
+            Enums::TransactionType.calculate_transaction_type(index)
           rescue StandardError
             return nil
           end

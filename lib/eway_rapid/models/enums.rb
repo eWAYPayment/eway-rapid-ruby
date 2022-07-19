@@ -64,6 +64,18 @@ module EwayRapid
       PURCHASE = 'Purchase'
       RECURRING = 'Recurring'
       MOTO = 'MOTO'
+
+      # @param [Integer] index
+      # @return [String]
+      def self.calculate_transaction_type(index)
+        case index
+        when 1 then PURCHASE
+        when 2 then RECURRING
+        when 3 then MOTO
+        else
+          nil
+        end
+      end
     end
 
     class TransactionFilter
