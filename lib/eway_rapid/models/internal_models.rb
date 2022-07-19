@@ -327,6 +327,7 @@ module EwayRapid
       attr_accessor :total_amount
       attr_accessor :transaction_id
       attr_accessor :transaction_status
+      attr_accessor :transaction_type
       attr_accessor :token_customer_id
       attr_accessor :beagle_score
       attr_accessor :options
@@ -387,6 +388,7 @@ module EwayRapid
         transaction.total_amount = hash[Constants::TOTAL_AMOUNT]
         transaction.transaction_id = hash[Constants::TRANSACTION_ID]
         transaction.transaction_status = hash[Constants::TRANSACTION_STATUS]
+        transaction.transaction_type = hash[Constants::TRANSACTION_TYPE]
         transaction.token_customer_id = hash[Constants::TOKEN_CUSTOMER_ID]
         transaction.beagle_score = hash[Constants::BEAGLE_SCORE]
         transaction.options = Option.from_array(hash[Constants::OPTIONS])

@@ -345,6 +345,7 @@ module EwayRapid
       # (v40+ query response only)
       attr_accessor :transaction_date_time
       attr_accessor :transaction_captured
+      attr_accessor :transaction_type
       attr_accessor :source
       attr_accessor :max_refund
       attr_accessor :original_transaction_id

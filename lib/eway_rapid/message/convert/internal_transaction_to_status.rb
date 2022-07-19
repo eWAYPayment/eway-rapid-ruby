@@ -14,6 +14,7 @@ module EwayRapid
           transaction_status.verification_result = get_verification_result(transaction)
           transaction_status.transaction_date_time = transaction.transaction_date_time
           transaction_status.transaction_captured = transaction.transaction_captured
+          transaction_status.transaction_type = transaction.transaction_type
           transaction_status.source = transaction.source
           transaction_status.max_refund = transaction.max_refund
           transaction_status.original_transaction_id = transaction.original_transaction_id
